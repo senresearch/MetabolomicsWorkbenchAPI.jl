@@ -12,9 +12,7 @@ end
  Converts a string from a single json entry into a Dictionary.
 """
 function parse_json(str)
-    # Make it robust to any html code before json 
-    idxStart = findfirst("{", str)[1]
-    str = str[idxStart:end]
+    str = filt_json(str)
     return JSON.parse(str)
 end
 
@@ -26,6 +24,7 @@ end
  Converts a string from a single json entry into a dataframe.
 """
 function json2df(s::String)
+    s = filt_json(s)
     dict = JSON.parse(s)
     return j2d(dict)
 end
@@ -51,3 +50,14 @@ function url2df(url::String)
     output_json = get_output(url)
     return json2df(output_json)
 end
+
+"""
+Remove any text before the first '{' in a string.
+"""
+function filt_json(str::String)
+    # Make it robust to any html code before json 
+    idxStart = findfirst("{", str)[1]
+    str = str[idxStart:end]
+    return str
+end
+
