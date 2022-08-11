@@ -12,6 +12,9 @@ end
  Converts a string from a single json entry into a Dictionary.
 """
 function parse_json(str)
+    # Make it robust to any html code before json 
+    idxStart = findfirst("{", str)[1]
+    str = str[idxStart:end]
     return JSON.parse(str)
 end
 
