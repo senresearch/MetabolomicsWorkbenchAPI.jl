@@ -18,7 +18,8 @@
 
 """
 function mw_match(metabolite_name::String)
-    url = string(mw_url(), "rest/", "refmet/", "match/",  metabolite_name)
+    # Note: we remove "(" and ")" since rest match is note robust to extra paratentheses
+    url = string(mw_url(), "rest/", "refmet/", "match/",  replace(metabolite_name, "("=>"", ")"=>""))
     return url2df(url)
 end
 
