@@ -58,5 +58,5 @@ function fix_unbalance_name(s::String)
     else  
         return s 
     end 
-    return fix_unbalance_name(rmv_by_idx!(s, idx)) 
+    return fix_unbalance_name(rmv_by_idx(s, idx)) 
 end
