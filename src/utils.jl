@@ -28,9 +28,9 @@ end
 
 
 """                                                                                    
-**`fix_unbalance_name`** - *Function*
+**`fix_unbalanced_name`** - *Function*
 
-fix_unbalance_name(s::String) => String
+fix_unbalanced_name(s::String) => String
 
 Recursive function that fixes unbalanced parentheses in a string, and returns balanced string.
 
@@ -38,17 +38,17 @@ Recursive function that fixes unbalanced parentheses in a string, and returns ba
 
 ```jldoctest     
 julia> my_s = "DG(18:1(/1(8:1)"  
-julia> fix_unbalance_name(my_s) 
+julia> fix_unbalanced_name(my_s) 
 "DG(18:1/18:1)"  
 julia> my_s = "DG(18:1/18:1))"  
-julia> fix_unbalance_name(my_s) 
+julia> fix_unbalanced_name(my_s) 
 "DG(18:1/18:1)" 
 julia> my_s = "DG(((((18:1/18:1))" 
-julia> fix_unbalance_name(my_s) 
+julia> fix_unbalanced_name(my_s) 
 "DG((18:1/18:1))" 
 ``` 
 """ 
-function fix_unbalance_name(s::String)
+function fix_unbalanced_name(s::String)
     left = findall( x -> x .== '(', s)
     right = findall( x -> x .== ')', s)
     if length(left) > length(right)
@@ -58,5 +58,5 @@ function fix_unbalance_name(s::String)
     else  
         return s 
     end 
-    return fix_unbalance_name(rmv_by_idx(s, idx)) 
+    return fix_unbalanced_name(rmv_by_idx(s, idx)) 
 end

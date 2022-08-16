@@ -24,4 +24,7 @@ module MetabolomicsWorkbenchAPI
     include("./fetch_data.jl")    
     export fetch_annotations
 
+    include("./fetch_data.jl")    
+    export fix_unbalanced_name
+
 end

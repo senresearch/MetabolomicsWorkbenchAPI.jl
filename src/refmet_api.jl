@@ -19,7 +19,7 @@
 """
 function mw_match(metabolite_name::String)
     # Note: we remove "(" and ")" since rest match is note robust to extra paratentheses
-    url = string(mw_url(), "rest/", "refmet/", "match/",  fix_unbalance_name(metabolite_name))
+    url = string(mw_url(), "rest/", "refmet/", "match/",  fix_unbalanced_name(metabolite_name))
     return url2df(url)
 end
 
