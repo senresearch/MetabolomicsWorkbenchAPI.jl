@@ -7,13 +7,13 @@ with datasets through the REST API of https://www.metabolomicsworkbench.org/.
 
 module MetabolomicsWorkbenchAPI
 
-    using HTTP, JSON, DataFrames, CSV
+    using HTTP, JSON, JSON3, DataFrames, CSV
 
     include("./query.jl")    
     export mw_url, check_mw
 
     include("./api_process.jl")
-    export get_output, parse_json, json2df, j2d, url2df  
+    export get_output, parse_json, parse_json3, json2df, j2d, url2df  
         
     include("./refmet_api.jl")    
     export mw_match
@@ -22,9 +22,9 @@ module MetabolomicsWorkbenchAPI
     export mw_mwtab
 
     include("./fetch_data.jl")    
-    export fetch_annotations
+    export fetch_annotations, fetch_samples
 
     include("./utils.jl")    
-    export fix_unbalanced_name
+    export fix_unbalanced_name, get_variables_names, build_df_data
 
 end

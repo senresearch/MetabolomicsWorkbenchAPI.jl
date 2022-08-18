@@ -16,6 +16,11 @@ function parse_json(str)
     return JSON.parse(str)
 end
 
+function parse_json3(str)
+    str = filt_json(str)
+    return JSON3.read(str)
+end
+
 function str2df(input::String; delim=',', comments=false)
     df = DataFrames.inlinetable(input, separator=delim, header=true, allowcomments=comments)
 end

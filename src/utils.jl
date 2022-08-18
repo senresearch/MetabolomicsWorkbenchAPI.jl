@@ -60,3 +60,41 @@ function fix_unbalanced_name(s::String)
     end 
     return fix_unbalanced_name(rmv_by_idx(s, idx)) 
 end
+
+
+"""
+**get_variable_names** -*Function*.
+
+get_variable_names(vDF::Vector{DataFrame}) => Vector{String}
+
+Return the union variable names of all samples as a vector of `String`.   
+"""
+function get_variables_names(vDF::Vector{DataFrame})
+
+    varNames = unique(reduce(vcat, names.(vDF)))
+        
+    return varNames
+end
+
+
+"""
+**build_df_data** -*Function*.
+
+build_df_data(vDF::Vector{DataFrame}) => DataFrame
+
+It checks all samples and includes all the variables names. If a sample misses one or more variable,
+it generates the missing entries for all variables. It returns a dataframe.   
+"""
+function build_df_data(vDF::Vector{DataFrame})
+    
+    refVarNames = get_variables_names(vDF)
+        
+    for i in 1:length(vDF)
+        vMissNames = setdiff(refVarNames, names(vDF[i]))
+        vDF[i] = hcat(vDF[i], DataFrame(repeat(["NA"], 1,length(vMissNames)), vMissNames))
+    end
+    
+    df = reduce(vcat,vDF)
+    
+    return df
+end

@@ -8,13 +8,13 @@
 """
 **`mw_mwtab`** - *Function*
 
-    mw_mwtab(study_name::String; format = "txt") => String
+    mw_mwtab(study_name::String; format = "json") => String
 
-Fetch the mwtab output for a study in text (default) or json format.
+Fetch the mwtab output for a study in json (default) or txt format.
 
 """
-function mw_mwtab(study_name::String; format = "txt")
-    url = string(mw_url(), "rest/", "study/",  study_name, string("/mwtab/", format))
+function mw_mwtab(study_name::String; format = "json")
+    url = string(mw_url(), "rest/", "study/", "study_id/", study_name, string("/mwtab/", format))
     return get_output(url)
 end
 
