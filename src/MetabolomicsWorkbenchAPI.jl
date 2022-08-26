@@ -22,7 +22,7 @@ module MetabolomicsWorkbenchAPI
     export mw_mwtab
 
     include("./fetch_data.jl")    
-    export fetch_annotations, fetch_samples
+    export fetch_annotations, fetch_samples, fetch_data, fetch_metabolites
 
     include("./utils.jl")    
     export fix_unbalanced_name, get_variables_names, build_df_data
