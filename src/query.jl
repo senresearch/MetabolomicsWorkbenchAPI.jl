@@ -18,9 +18,9 @@ function mw_url()
 end
 
 """
-**check_gn** -*Function*.
+**check_mw** -*Function*.
 
-check_gn(url::AbstractString) => String
+check_mw(url::AbstractString=mw_url()) => String
 
 Checks if Metabolomics Workbench server is responding properly.
 Returns the HTTP status code (`200` if successful) and prints a
