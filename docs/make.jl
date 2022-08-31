@@ -10,7 +10,7 @@ makedocs(
     sitename="MetabolomicsWorkbenchAPI.jl",
     format=Documenter.HTML(
         prettyurls=get(ENV, "CI", "false") == "true",
-        canonical="https://senresearch.github.io/MetabolomicsWorkbenchAPI.jl/stable",
+        canonical="https://senresearch.github.io/MetabolomicsWorkbenchAPI.jl",
     ),
     pages=[
         "Overview" => "index.md",
