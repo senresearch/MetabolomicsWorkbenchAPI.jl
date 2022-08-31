@@ -1,5 +1,3 @@
-[![CI](https://github.com/senresearch/MetabolomicsWorkbenchAPI.jl/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/senresearch/MetabolomicsWorkbenchAPI.jl/actions/workflows/ci.yml)
-
 # MetabolomicsWorkbenchAPI.jl
 
 The [Metabolomics Workbench](https://www.metabolomicsworkbench.org/) operates as an international repository for metabolomics data and metadata while delivering analysis tools and access to metabolite standards, protocols, and more. The Metabolomics Workbench was developed by the Metabolomics Common Fund's National Metabolomics Data Repository(NMDR) to support the development of next-generation technologies, increase the inventory and availability of high-quality reference standards, and facilitate data sharing and collaboration.

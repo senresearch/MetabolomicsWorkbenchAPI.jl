@@ -1,14 +1,12 @@
 # This file contains the functions to check status and adress or metabolomics workbench REST API.
 
 """
-**check_gn** -*Function*.
-
-mw_url() => String
+    mw_url() => String
 
 Returns the default Metabolomics Workbench REST API URL.
 
 # Example
-```jldoctest
+```julia
 julia> mw_url()
 "https://www.metabolomicsworkbench.org/"
 ```
@@ -18,15 +16,13 @@ function mw_url()
 end
 
 """
-**check_mw** -*Function*.
-
-check_mw(url::AbstractString=mw_url()) => String
+    check_mw(url::AbstractString) => String
 
 Checks if Metabolomics Workbench server is responding properly.
 Returns the HTTP status code (`200` if successful) and prints a
 message.
 # Example
-```jldoctest
+```julia
 julia> check_mw()
 MetabolomicsWorkbench.org is alive.
 200
