@@ -9,7 +9,7 @@ Returns a new string without the character at the position `i` of the original s
 
 # Example:     
 
-```jldoctest     
+```     
 julia> my_s = "abcde"
 julia> rmv_by_idx(my_s, 3)
 "abde"
@@ -36,7 +36,7 @@ Recursive function that fixes unbalanced parentheses in a string, and returns ba
 
 # Example:     
 
-```jldoctest     
+```     
 julia> my_s = "DG(18:1(/1(8:1)"  
 julia> fix_unbalanced_name(my_s) 
 "DG(18:1/18:1)"  

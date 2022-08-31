@@ -24,19 +24,6 @@ function parse_json(s:: String)
     return JSON3.read(s)
 end
 
-# """
-#  Converts a string from a single json entry into a Dictionary.
-# """
-# function parse_json(str)
-#     str = filt_json(str)
-#     return JSON.parse(str)
-# end
-
-# function str2df(input::String; delim=',', comments=false)
-#     df = DataFrames.inlinetable(input, separator=delim, header=true, allowcomments=comments)
-# end
-
-
 """
 **`json2df`** - *Function*
 
