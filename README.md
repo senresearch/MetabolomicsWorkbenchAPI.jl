@@ -1,4 +1,5 @@
 [![CI](https://github.com/senresearch/MetabolomicsWorkbenchAPI.jl/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/senresearch/MetabolomicsWorkbenchAPI.jl/actions/workflows/ci.yml)
+[![Coverage](https://codecov.io/gh/senresearch/MetabolomicsWorkbenchAPI.jl/branch/main/graph/badge.svg)](https://codecov.io/gh/senresearch/MetabolomicsWorkbenchAPI.jl)
 
 # MetabolomicsWorkbenchAPI.jl
 
