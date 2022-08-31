@@ -1,8 +1,6 @@
 # This file contains functions to process the output of the metabolomics workbench REST URL queries. 
 
 """
-**`get_output`** - *Function*
-
     get_output(url::String) => String
 
  Gets output body from a URL.
@@ -13,8 +11,6 @@ function get_output(url::String)
 end
 
 """
-**`parse_json`** - *Function*
-
     parse_json(s) => JSON3.Object
 
  Read JSON.
@@ -25,8 +21,6 @@ function parse_json(s:: String)
 end
 
 """
-**`json2df`** - *Function*
-
     json2df(s) => DataFrame
  
  Converts a string from a single JSON entry into a dataframe.
@@ -38,8 +32,6 @@ function json2df(s::String)
 end
 
 """
-**`url2df`** - *Function*
-
     url2df(url::String) => DataFrame
 
 Gets the response from REST URL and converts a single JSON entry to dataframe
@@ -50,8 +42,6 @@ function url2df(url::String)
 end
 
 """
-**`filt_json`** - *Function*
-
     filt_json(s::String) => String
 
 Remove any text before the first '{' in a string.

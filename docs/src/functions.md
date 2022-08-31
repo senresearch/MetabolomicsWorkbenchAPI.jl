@@ -3,13 +3,11 @@
 ```@meta
 CurrentModule = MetabolomicsWorkbenchAPI
 ```
-
+## Index
 ```@index
 ```
 
-## Server functions
-
-```@docs
-MetabolomicsWorkbenchAPI.mw_url
-MetabolomicsWorkbenchAPI.check_mw
+## Description
+```@autodocs
+Modules = [MetabolomicsWorkbenchAPI]
 ```

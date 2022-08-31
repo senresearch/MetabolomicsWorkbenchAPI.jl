@@ -1,8 +1,6 @@
 # This file contains the functions to check status and adress or metabolomics workbench REST API.
 
 """
-**check_gn** -*Function*.
-
     mw_url() => String
 
 Returns the default Metabolomics Workbench REST API URL.
@@ -18,8 +16,6 @@ function mw_url()
 end
 
 """
-**check_mw** - Function.
-
     check_mw(url::AbstractString) => String
 
 Checks if Metabolomics Workbench server is responding properly.
