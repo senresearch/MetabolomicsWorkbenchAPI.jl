@@ -20,6 +20,6 @@ makedocs(
 
 deploydocs(
    repo="github.com/senresearch/MetabolomicsWorkbenchAPI.jl",
-   devbranch="dev",
+   devbranch="main",
    push_preview = true,
 )
