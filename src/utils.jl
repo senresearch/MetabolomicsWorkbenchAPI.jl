@@ -1,31 +1,6 @@
 # This file contains the utils functions.
 
 """                                                                                    
-     rmv_by_idx(s::String, i::Int) => String
-
-Returns a new string without the character at the position `i` of the original string `s`.
-
-# Example:     
-
-```     
-julia> my_s = "abcde"
-julia> rmv_by_idx(my_s, 3)
-"abde"
-```
-"""
-function rmv_by_idx(s::String, i::Int) 
-    if i == 1 
-        s = s[2:end] 
-    elseif i == length(s) 
-        s = s[1:end-1] 
-    else 
-        s = s[1:i-1]*s[i+1:end] 
-    end 
-    return s 
-end 
-
-
-"""                                                                                    
     fix_unbalanced_name(s::String) => String
 
 Recursive function that fixes unbalanced parentheses in a string, and returns balanced string.
