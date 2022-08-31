@@ -1,15 +1,13 @@
 # This file contains the utils functions.
 
 """                                                                                    
-**`rmv_by_idx`** - *Function*
-
-rmv_by_idx(s::String, i::Int) => String
+     rmv_by_idx(s::String, i::Int) => String
 
 Returns a new string without the character at the position `i` of the original string `s`.
 
 # Example:     
 
-```jldoctest     
+```     
 julia> my_s = "abcde"
 julia> rmv_by_idx(my_s, 3)
 "abde"
@@ -28,22 +26,20 @@ end
 
 
 """                                                                                    
-**`fix_unbalanced_name`** - *Function*
-
-fix_unbalanced_name(s::String) => String
+    fix_unbalanced_name(s::String) => String
 
 Recursive function that fixes unbalanced parentheses in a string, and returns balanced string.
 
 # Example:     
 
-```jldoctest     
-julia> my_s = "DG(18:1(/1(8:1)"  
+```     
+julia> my_s = "DG(18:1(/1(8:1)";  
 julia> fix_unbalanced_name(my_s) 
 "DG(18:1/18:1)"  
-julia> my_s = "DG(18:1/18:1))"  
+julia> my_s = "DG(18:1/18:1))";
 julia> fix_unbalanced_name(my_s) 
 "DG(18:1/18:1)" 
-julia> my_s = "DG(((((18:1/18:1))" 
+julia> my_s = "DG(((((18:1/18:1))";
 julia> fix_unbalanced_name(my_s) 
 "DG((18:1/18:1))" 
 ``` 
@@ -63,9 +59,7 @@ end
 
 
 """
-**get_variable_names** -*Function*.
-
-get_variable_names(vDF::Vector{DataFrame}) => Vector{String}
+    get_variable_names(vDF::Vector{DataFrame}) => Vector{String}
 
 Return the union variable names of all samples as a vector of `String`.   
 """
@@ -78,9 +72,8 @@ end
 
 
 """
-**build_df_data** -*Function*.
 
-build_df_data(vDF::Vector{DataFrame}) => DataFrame
+    build_df_data(vDF::Vector{DataFrame}) => DataFrame
 
 It checks all samples and includes all the variables names. If a sample misses one or more variable,
 it generates the missing entries for all variables. It returns a dataframe.   
