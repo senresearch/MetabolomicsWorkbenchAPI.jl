@@ -209,7 +209,7 @@ function fetch_total_subjects(studyname::String; verbose = true)
     df = fetch_study_info(studyname)
     
     if ["TOTAL_SUBJECTS"] ⊆ names(df)
-        n = parse(Int, df.TOTAL_SUBJECTS)
+        n = parse(Int, df.TOTAL_SUBJECTS[1])
         return n
     else
         verbose ? println("TOTAL_SUBJECTS not found in study $(studyname) description.") :
