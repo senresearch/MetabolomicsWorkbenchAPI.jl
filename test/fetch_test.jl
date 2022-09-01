@@ -27,7 +27,7 @@ println("Fetch data test: ", @test (df[1:2, 1:4] == dfTestData));
 
 df = fetch_metabolites("ST000001")
 
-println("Fetch attributes test: ", @test (df[1:2, 1:4] == dfTestMetabolites));
+println("Fetch properties test: ", @test (df[1:2, 1:4] == dfTestMetabolites));
 
 ########################
 # TEST 5 fetch samples #
@@ -43,4 +43,4 @@ println("Fetch samples test: ", @test (df[1:2, :] == dfTestSamples));
 
 n = fetch_total_subjects("ST000001")
 
-println("Fetch samples test: ", @test (n == 24));
+println("Fetch total subjects test: ", @test (n == 24));

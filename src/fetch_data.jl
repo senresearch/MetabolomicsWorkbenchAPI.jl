@@ -61,7 +61,7 @@ end
 
 
 """                                                                                    
-    fetch_data(study_name::String) => DataFrame
+    fetch_data(studyname::String) => DataFrame
 
 Return the metabolite data of the study as a dataframe.  
 
@@ -83,7 +83,7 @@ julia> df[1:5,1:3]
 """
 function fetch_data(studyname::String)
 
-    s = mw_mwtab(studyname::String)
+    s = mw_mwtab(studyname)
 
     jsonFile = parse_json(s)
     dfData = DataFrame(jsonFile[:MS_METABOLITE_DATA][:Data])
@@ -94,7 +94,7 @@ end
 
 
 """                                                                                    
-    fetch_metabolites(study_name::String) => DataFrame
+    fetch_metabolites(studyname::String) => DataFrame
 
 Return the dataframe of the metabolites' attributes of the study.  
 
@@ -116,7 +116,7 @@ julia> df[1:5,1:3]
 """
 function fetch_metabolites(studyname::String)
 
-    s = mw_mwtab(studyname::String)
+    s = mw_mwtab(studyname)
 
     jsonFile = parse_json(s)
     dfMetabolites = DataFrame(jsonFile[:MS_METABOLITE_DATA][:Metabolites])
@@ -127,7 +127,7 @@ end
 
 
 """                                                                                    
-    fetch_samples(study_name::String) => DataFrame
+    fetch_samples(studyname::String) => DataFrame
 
 Return the samples dataframe of the study.  
 
@@ -148,9 +148,9 @@ julia> fetch_samples("ST001710")
                                                                                                                                                                                             5 columns and 615 rows omitted
 ```
 """
-function fetch_samples(study_name::String)
+function fetch_samples(studyname::String)
 
-    s = mw_mwtab(study_name::String)
+    s = mw_mwtab(studyname)
 
     jsonFile = parse_json(s)
     df = DataFrame(jsonFile[:SUBJECT_SAMPLE_FACTORS])
@@ -167,7 +167,33 @@ end
 
 
 """                                                                                    
-    fetch_total_subjects(study_name::String) => Integer
+    fetch_study_info(studyname::String) => DataFrame
+
+Returns a dataframe containing the available study information such as
+the study title, summary, institute name, total number of subjects and much more.
+
+# Example:     
+
+```     
+julia> fetch_study_info("ST001052")
+51                                                                                                                                                                                5 columns and 615 rows omitted
+```
+"""
+function fetch_study_info(studyname::String)
+
+    s = mw_mwtab(studyname)
+
+    jsonFile = parse_json(s)
+
+    df = DataFrame(jsonFile[:STUDY])
+
+    return df
+
+end
+
+
+"""                                                                                    
+    fetch_total_subjects(studyname::String) => Integer
 
 Return the total number of subjects of the study.  
 
@@ -178,14 +204,16 @@ julia> fetch_total_subjects("ST001052")
 51                                                                                                                                                                                5 columns and 615 rows omitted
 ```
 """
-function fetch_total_subjects(study_name::String)
+function fetch_total_subjects(studyname::String; verbose = true)
 
-    s = mw_mwtab(study_name::String)
-
-    jsonFile = parse_json(s)
-
-    n = parse(Int, jsonFile[:STUDY][:TOTAL_SUBJECTS])
-
-    return n
+    df = fetch_study_info(studyname)
+    
+    if ["TOTAL_SUBJECTS"] ⊆ names(df)
+        n = parse(Int, df.TOTAL_SUBJECTS)
+        return n
+    else
+        verbose ? println("TOTAL_SUBJECTS not found in study $(studyname) description.") :
+            return nothing
+    end
 
 end

@@ -23,7 +23,7 @@ module MetabolomicsWorkbenchAPI
 
     include("./fetch_data.jl")    
     export fetch_properties, fetch_data, fetch_metabolites, fetch_samples,
-           fetch_total_subjects
+           fetch_study_info, fetch_total_subjects
 
     include("./utils.jl")    
     export fix_unbalanced_name, get_variables_names, build_df_data
