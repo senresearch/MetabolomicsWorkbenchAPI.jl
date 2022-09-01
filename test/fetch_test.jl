@@ -37,8 +37,17 @@ df = fetch_samples("ST000001")
 
 println("Fetch samples test: ", @test (df[1:2, :] == dfTestSamples));
 
+#################################
+# TEST 6 fetch sudy description #
+#################################
+
+df = fetch_study_info("ST000001")
+df = select(df, [:STUDY_TYPE, :NUM_GROUPS, :TOTAL_SUBJECTS])
+
+println("Fetch total subjects test: ", @test (df == dfTestStudyInfo));
+
 ###############################
-# TEST 6 fetch total subjects #
+# TEST 7 fetch total subjects #
 ###############################
 
 n = fetch_total_subjects("ST000001")

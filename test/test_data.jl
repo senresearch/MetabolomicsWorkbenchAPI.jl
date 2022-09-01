@@ -52,10 +52,19 @@ dfTestMetabolites = MetabolomicsWorkbenchAPI.DataFrame(
 );
 
 
-# TEST - fetch_metabolites
+# TEST - fetch_samples
 
 dfTestSamples = MetabolomicsWorkbenchAPI.DataFrame(
     ["LabF_115873"  "Wassilewskija (Ws)" "Control - Non-Wounded";
      "LabF_115878" "Wassilewskija (Ws)" "Control - Non-Wounded"],
     ["Sample ID", "Arabidopsis Genotype", "Plant Wounding Treatment"]
+);
+
+
+# TEST - fetch_study_info
+
+dfTestStudyInfo = MetabolomicsWorkbenchAPI.DataFrame(
+    STUDY_TYPE=["Genotype treatment"],
+    NUM_GROUPS=["4"],
+    TOTAL_SUBJECTS=["24"],
 );
