@@ -36,3 +36,11 @@ println("Fetch attributes test: ", @test (df[1:2, 1:4] == dfTestMetabolites));
 df = fetch_samples("ST000001")
 
 println("Fetch samples test: ", @test (df[1:2, :] == dfTestSamples));
+
+###############################
+# TEST 6 fetch total subjects #
+###############################
+
+n = fetch_total_subjects("ST000001")
+
+println("Fetch samples test: ", @test (n == 24));

@@ -34,28 +34,28 @@ julia> fetch_properties(vNames)
 function fetch_properties(vMetabolitesNames::Vector{String})
     # Initialize vectors of information
     n = length(vMetabolitesNames)
-    vExactmass = Vector{Union{Missing, String}}(undef,n)
-    vFormula = Vector{Union{Missing, String}}(undef,n)
-    vMainclass = Vector{String}(undef,n)
-    vRefmetname = Vector{String}(undef,n)
-    vSubclass = Vector{String}(undef,n)
-    vSuperclass = Vector{String}(undef,n)
+    vExactmass = Vector{Union{Missing,String}}(undef, n)
+    vFormula = Vector{Union{Missing,String}}(undef, n)
+    vMainclass = Vector{String}(undef, n)
+    vRefmetname = Vector{String}(undef, n)
+    vSubclass = Vector{String}(undef, n)
+    vSuperclass = Vector{String}(undef, n)
 
     for i in 1:length(vMetabolitesNames)
         df = mw_match(vMetabolitesNames[i])
 
-        vExactmass[i] = ["exactmass"] ⊆  names(df) ? df.exactmass[1] : missing
-        vFormula[i]= ["formula"] ⊆  names(df) ? df.formula[1] : missing
+        vExactmass[i] = ["exactmass"] ⊆ names(df) ? df.exactmass[1] : missing
+        vFormula[i] = ["formula"] ⊆ names(df) ? df.formula[1] : missing
         vMainclass[i] = df.main_class[1]
         vRefmetname[i] = df.refmet_name[1]
         vSubclass[i] = df.sub_class[1]
         vSuperclass[i] = df.super_class[1]
     end
 
-    dfOut = DataFrame(exactmass = vExactmass, formula = vFormula,
-                main_class = vMainclass, refmet_name = vRefmetname,
-                sub_class = vSubclass, super_class = vSuperclass)
-    
+    dfOut = DataFrame(exactmass=vExactmass, formula=vFormula,
+        main_class=vMainclass, refmet_name=vRefmetname,
+        sub_class=vSubclass, super_class=vSuperclass)
+
     return dfOut
 end
 
@@ -82,14 +82,14 @@ julia> df[1:5,1:3]
 ```
 """
 function fetch_data(studyname::String)
-    
+
     s = mw_mwtab(studyname::String)
-    
+
     jsonFile = parse_json(s)
     dfData = DataFrame(jsonFile[:MS_METABOLITE_DATA][:Data])
-    
+
     return dfData
-    
+
 end
 
 
@@ -115,14 +115,14 @@ julia> df[1:5,1:3]
 ```
 """
 function fetch_metabolites(studyname::String)
-    
+
     s = mw_mwtab(studyname::String)
-    
+
     jsonFile = parse_json(s)
     dfMetabolites = DataFrame(jsonFile[:MS_METABOLITE_DATA][:Metabolites])
-    
+
     return dfMetabolites
-    
+
 end
 
 
@@ -149,18 +149,43 @@ julia> fetch_samples("ST001710")
 ```
 """
 function fetch_samples(study_name::String)
-    
+
     s = mw_mwtab(study_name::String)
-    
+
     jsonFile = parse_json(s)
     df = DataFrame(jsonFile[:SUBJECT_SAMPLE_FACTORS])
-    
-    dfSamples =  hcat(select(df, ["Sample ID"]), build_df_data(DataFrame.(df.Factors)))
-    
-    if ["Additional sample data"] ⊆  names(df) 
+
+    dfSamples = hcat(select(df, ["Sample ID"]), build_df_data(DataFrame.(df.Factors)))
+
+    if ["Additional sample data"] ⊆ names(df)
         dfSamples = hcat(dfSamples, build_df_data(DataFrame.(df."Additional sample data")))
     end
 
     return dfSamples
-    
+
+end
+
+
+"""                                                                                    
+    fetch_total_subjects(study_name::String) => Integer
+
+Return the total number of subjects of the study.  
+
+# Example:     
+
+```     
+julia> fetch_total_subjects("ST001052")
+51                                                                                                                                                                                5 columns and 615 rows omitted
+```
+"""
+function fetch_total_subjects(study_name::String)
+
+    s = mw_mwtab(study_name::String)
+
+    jsonFile = parse_json(s)
+
+    n = parse(Int, jsonFile[:STUDY][:TOTAL_SUBJECTS])
+
+    return n
+
 end
