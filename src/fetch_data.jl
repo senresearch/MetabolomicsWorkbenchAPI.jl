@@ -46,10 +46,10 @@ function fetch_properties(vMetabolitesNames::Vector{String})
 
         vExactmass[i] = ["exactmass"] ⊆ names(df) ? df.exactmass[1] : missing
         vFormula[i] = ["formula"] ⊆ names(df) ? df.formula[1] : missing
-        vMainclass[i] = df.main_class[1]
-        vRefmetname[i] = df.refmet_name[1]
-        vSubclass[i] = df.sub_class[1]
-        vSuperclass[i] = df.super_class[1]
+        vMainclass[i] = ["main_class"] ⊆ names(df) ? df.main_class[1] : missing
+        vRefmetname[i] = ["refmet_name"] ⊆ names(df) ? df.refmet_name[1] : missing
+        vSubclass[i] = ["sub_class"] ⊆ names(df) ? df.sub_class[1] : missing
+        vSuperclass[i] = ["super_class"] ⊆ names(df) ? df.super_class[1] : missing
     end
 
     dfOut = DataFrame(exactmass=vExactmass, formula=vFormula,
