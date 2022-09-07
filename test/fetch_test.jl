@@ -42,7 +42,7 @@ println("Fetch samples test: ", @test (df[1:2, :] == dfTestSamples));
 #################################
 
 df = fetch_study_info("ST000001")
-df = select(df, [:STUDY_TYPE, :NUM_GROUPS, :TOTAL_SUBJECTS])
+df = MetabolomicsWorkbenchAPI.DataFrames.select(df, [:STUDY_TYPE, :NUM_GROUPS, :TOTAL_SUBJECTS])
 
 println("Fetch total subjects test: ", @test (df == dfTestStudyInfo));
 
