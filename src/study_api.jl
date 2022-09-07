@@ -6,12 +6,15 @@
 
 
 """
-    mw_mwtab(study_name::String; format = "json") => String
+    mw_mwtab(studyname::String; format = "json") => String
 
 Fetch the mwtab output for a study in json (default) or txt format.
 
 """
-function mw_mwtab(study_name::String; format = "json")
-    url = string(mw_url(), "rest/", "study/", "study_id/", study_name, string("/mwtab/", format))
-    return get_output(url)
+function mw_mwtab(studyname::String; format = "json")
+    url = string(mw_url(), "rest/", "study/", "study_id/", studyname, string("/mwtab/", format))
+     s = get_output(url)
+
+     isempty(s) ? throw("No study name $(studyname) matching.") : return s
+
 end

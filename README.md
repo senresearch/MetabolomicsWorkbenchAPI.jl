@@ -80,15 +80,14 @@ julia> select(df, Not(["inchi_key", "other_id_type"]))[1:5,:]
 To get samples and experimental variables for a study.
 
 ```Julia
-julia> df = fetch_metabolites("ST000001");
-julia> select(df, Not(["inchi_key", "other_id_type"]))[1:5,:]
-5×7 DataFrame
- Row │ Metabolite               moverz_quant  ri      ri_type  pubchem_id  kegg_id  other_id 
-     │ String                   String        String  String   String      String   String   
-─────┼───────────────────────────────────────────────────────────────────────────────────────
-   1 │ 1,2,4-benzenetriol       239           522741  Fiehn    10787       C02814   205673
-   2 │ 1-monostearin            399           959625  Fiehn    107036      D01947   202835
-   3 │ 2-hydroxyvaleric acid    131           310750  Fiehn    98009                218773
-   4 │ 3-phosphoglycerate       299           611619  Fiehn    724         C00597   217821
-   5 │ 5-hydroxynorvaline NIST  142           494838  Fiehn    95562                200384
+julia> df = fetch_samples("ST000001");
+julia> first(df, 3)
+3×3 DataFrame
+ Row │ Sample ID    Arabidopsis Genotype  Plant Wounding Treatment 
+     │ String       String                String
+─────┼─────────────────────────────────────────────────────────────
+   1 │ LabF_115873  Wassilewskija (Ws)    Control - Non-Wounded
+   2 │ LabF_115878  Wassilewskija (Ws)    Control - Non-Wounded
+   3 │ LabF_115883  Wassilewskija (Ws)    Control - Non-Wounded
+
 ```

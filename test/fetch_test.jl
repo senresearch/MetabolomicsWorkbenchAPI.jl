@@ -27,7 +27,7 @@ println("Fetch data test: ", @test (df[1:2, 1:4] == dfTestData));
 
 df = fetch_metabolites("ST000001")
 
-println("Fetch attributes test: ", @test (df[1:2, 1:4] == dfTestMetabolites));
+println("Fetch properties test: ", @test (df[1:2, 1:4] == dfTestMetabolites));
 
 ########################
 # TEST 5 fetch samples #
@@ -36,3 +36,20 @@ println("Fetch attributes test: ", @test (df[1:2, 1:4] == dfTestMetabolites));
 df = fetch_samples("ST000001")
 
 println("Fetch samples test: ", @test (df[1:2, :] == dfTestSamples));
+
+#################################
+# TEST 6 fetch sudy description #
+#################################
+
+df = fetch_study_info("ST000001")
+df = MetabolomicsWorkbenchAPI.DataFrames.select(df, [:STUDY_TYPE, :NUM_GROUPS, :TOTAL_SUBJECTS])
+
+println("Fetch total subjects test: ", @test (df == dfTestStudyInfo));
+
+###############################
+# TEST 7 fetch total subjects #
+###############################
+
+n = fetch_total_subjects("ST000001")
+
+println("Fetch total subjects test: ", @test (n == 24));

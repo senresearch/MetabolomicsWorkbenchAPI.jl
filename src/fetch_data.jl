@@ -34,34 +34,34 @@ julia> fetch_properties(vNames)
 function fetch_properties(vMetabolitesNames::Vector{String})
     # Initialize vectors of information
     n = length(vMetabolitesNames)
-    vExactmass = Vector{Union{Missing, String}}(undef,n)
-    vFormula = Vector{Union{Missing, String}}(undef,n)
-    vMainclass = Vector{String}(undef,n)
-    vRefmetname = Vector{String}(undef,n)
-    vSubclass = Vector{String}(undef,n)
-    vSuperclass = Vector{String}(undef,n)
+    vExactmass = Vector{Union{Missing,String}}(undef, n)
+    vFormula = Vector{Union{Missing,String}}(undef, n)
+    vMainclass = Vector{Union{Missing,String}}(undef, n)
+    vRefmetname = Vector{Union{Missing,String}}(undef, n)
+    vSubclass = Vector{Union{Missing,String}}(undef, n)
+    vSuperclass = Vector{Union{Missing,String}}(undef, n)
 
     for i in 1:length(vMetabolitesNames)
         df = mw_match(vMetabolitesNames[i])
 
-        vExactmass[i] = ["exactmass"] ⊆  names(df) ? df.exactmass[1] : missing
-        vFormula[i]= ["formula"] ⊆  names(df) ? df.formula[1] : missing
-        vMainclass[i] = df.main_class[1]
-        vRefmetname[i] = df.refmet_name[1]
-        vSubclass[i] = df.sub_class[1]
-        vSuperclass[i] = df.super_class[1]
+        vExactmass[i] = ["exactmass"] ⊆ names(df) ? df.exactmass[1] : missing
+        vFormula[i] = ["formula"] ⊆ names(df) ? df.formula[1] : missing
+        vMainclass[i] = ["main_class"] ⊆ names(df) ? df.main_class[1] : missing
+        vRefmetname[i] = ["refmet_name"] ⊆ names(df) ? df.refmet_name[1] : missing
+        vSubclass[i] = ["sub_class"] ⊆ names(df) ? df.sub_class[1] : missing
+        vSuperclass[i] = ["super_class"] ⊆ names(df) ? df.super_class[1] : missing
     end
 
-    dfOut = DataFrame(exactmass = vExactmass, formula = vFormula,
-                main_class = vMainclass, refmet_name = vRefmetname,
-                sub_class = vSubclass, super_class = vSuperclass)
-    
+    dfOut = DataFrame(exactmass=vExactmass, formula=vFormula,
+        main_class=vMainclass, refmet_name=vRefmetname,
+        sub_class=vSubclass, super_class=vSuperclass)
+
     return dfOut
 end
 
 
 """                                                                                    
-    fetch_data(study_name::String) => DataFrame
+    fetch_data(studyname::String) => DataFrame
 
 Return the metabolite data of the study as a dataframe.  
 
@@ -82,19 +82,19 @@ julia> df[1:5,1:3]
 ```
 """
 function fetch_data(studyname::String)
-    
-    s = mw_mwtab(studyname::String)
-    
+
+    s = mw_mwtab(studyname)
+
     jsonFile = parse_json(s)
     dfData = DataFrame(jsonFile[:MS_METABOLITE_DATA][:Data])
-    
+
     return dfData
-    
+
 end
 
 
 """                                                                                    
-    fetch_metabolites(study_name::String) => DataFrame
+    fetch_metabolites(studyname::String) => DataFrame
 
 Return the dataframe of the metabolites' attributes of the study.  
 
@@ -115,19 +115,19 @@ julia> df[1:5,1:3]
 ```
 """
 function fetch_metabolites(studyname::String)
-    
-    s = mw_mwtab(studyname::String)
-    
+
+    s = mw_mwtab(studyname)
+
     jsonFile = parse_json(s)
     dfMetabolites = DataFrame(jsonFile[:MS_METABOLITE_DATA][:Metabolites])
-    
+
     return dfMetabolites
-    
+
 end
 
 
 """                                                                                    
-    fetch_samples(study_name::String) => DataFrame
+    fetch_samples(studyname::String) => DataFrame
 
 Return the samples dataframe of the study.  
 
@@ -148,19 +148,77 @@ julia> fetch_samples("ST001710")
                                                                                                                                                                                             5 columns and 615 rows omitted
 ```
 """
-function fetch_samples(study_name::String)
-    
-    s = mw_mwtab(study_name::String)
-    
+function fetch_samples(studyname::String)
+
+    s = mw_mwtab(studyname)
+
     jsonFile = parse_json(s)
     df = DataFrame(jsonFile[:SUBJECT_SAMPLE_FACTORS])
-    
-    dfSamples =  hcat(select(df, ["Sample ID"]), build_df_data(DataFrame.(df.Factors)))
-    
-    if ["Additional sample data"] ⊆  names(df) 
+
+    dfSamples = hcat(select(df, ["Sample ID"]), build_df_data(DataFrame.(df.Factors)))
+
+    if ["Additional sample data"] ⊆ names(df)
         dfSamples = hcat(dfSamples, build_df_data(DataFrame.(df."Additional sample data")))
     end
 
     return dfSamples
+
+end
+
+
+"""                                                                                    
+    fetch_study_info(studyname::String) => DataFrame
+
+Returns a dataframe containing the available study information such as
+the study title, summary, institute name, total number of subjects and much more.
+
+# Example:     
+
+```     
+julia> df = fetch_study_info("ST000001");
+julia> select(dftest, [:STUDY_TITLE, :INSTITUTE])
+1×2 DataFrame
+ Row │ STUDY_TITLE                        INSTITUTE
+     │ String                             String
+─────┼────────────────────────────────────────────────────────────────────
+   1 │ Fatb Induction Experiment (FatBI…  University of California, Davis                                                                                                                                                                                5 columns and 615 rows omitted
+```
+"""
+function fetch_study_info(studyname::String)
+
+    s = mw_mwtab(studyname)
+
+    jsonFile = parse_json(s)
+
+    df = DataFrame(jsonFile[:STUDY])
+
+    return df
+
+end
+
+
+"""                                                                                    
+    fetch_total_subjects(studyname::String) => Integer
+
+Return the total number of subjects of the study.  
+
+# Example:     
+
+```     
+julia> fetch_total_subjects("ST001052")
+51                                                                                                                                                                                5 columns and 615 rows omitted
+```
+"""
+function fetch_total_subjects(studyname::String; verbose = true)
+
+    df = fetch_study_info(studyname)
     
+    if ["TOTAL_SUBJECTS"] ⊆ names(df)
+        n = parse(Int, df.TOTAL_SUBJECTS[1])
+        return n
+    else
+        verbose ? println("TOTAL_SUBJECTS not found in study $(studyname) description.") :
+            return nothing
+    end
+
 end
