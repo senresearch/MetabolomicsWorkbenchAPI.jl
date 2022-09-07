@@ -31,14 +31,13 @@ julia&gt; select(df, Not([&quot;inchi_key&quot;, &quot;other_id_type&quot;]))[1:
    2 │ 1-monostearin            399           959625  Fiehn    107036      D01947   202835
    3 │ 2-hydroxyvaleric acid    131           310750  Fiehn    98009                218773
    4 │ 3-phosphoglycerate       299           611619  Fiehn    724         C00597   217821
-   5 │ 5-hydroxynorvaline NIST  142           494838  Fiehn    95562                200384</code></pre><h2 id="Get-Samples-variables"><a class="docs-heading-anchor" href="#Get-Samples-variables">Get Samples variables</a><a id="Get-Samples-variables-1"></a><a class="docs-heading-anchor-permalink" href="#Get-Samples-variables" title="Permalink"></a></h2><p>To get samples and experimental variables for a study.</p><pre><code class="language-Julia hljs">julia&gt; df = fetch_metabolites(&quot;ST000001&quot;);
-julia&gt; select(df, Not([&quot;inchi_key&quot;, &quot;other_id_type&quot;]))[1:5,:]
-5×7 DataFrame
- Row │ Metabolite               moverz_quant  ri      ri_type  pubchem_id  kegg_id  other_id 
-     │ String                   String        String  String   String      String   String   
-─────┼───────────────────────────────────────────────────────────────────────────────────────
-   1 │ 1,2,4-benzenetriol       239           522741  Fiehn    10787       C02814   205673
-   2 │ 1-monostearin            399           959625  Fiehn    107036      D01947   202835
-   3 │ 2-hydroxyvaleric acid    131           310750  Fiehn    98009                218773
-   4 │ 3-phosphoglycerate       299           611619  Fiehn    724         C00597   217821
-   5 │ 5-hydroxynorvaline NIST  142           494838  Fiehn    95562                200384</code></pre></article><nav class="docs-footer"><a class="docs-footer-nextpage" href="functions/">Functions »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 0.27.23 on <span class="colophon-date" title="Wednesday 31 August 2022 20:27">Wednesday 31 August 2022</span>. Using Julia version 1.8.0.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
+   5 │ 5-hydroxynorvaline NIST  142           494838  Fiehn    95562                200384</code></pre><h2 id="Get-Samples-variables"><a class="docs-heading-anchor" href="#Get-Samples-variables">Get Samples variables</a><a id="Get-Samples-variables-1"></a><a class="docs-heading-anchor-permalink" href="#Get-Samples-variables" title="Permalink"></a></h2><p>To get samples and experimental variables for a study.</p><pre><code class="language-Julia hljs">julia&gt; df = fetch_samples(&quot;ST000001&quot;);
+julia&gt; first(df, 3)
+3×3 DataFrame
+ Row │ Sample ID    Arabidopsis Genotype  Plant Wounding Treatment 
+     │ String       String                String
+─────┼─────────────────────────────────────────────────────────────
+   1 │ LabF_115873  Wassilewskija (Ws)    Control - Non-Wounded
+   2 │ LabF_115878  Wassilewskija (Ws)    Control - Non-Wounded
+   3 │ LabF_115883  Wassilewskija (Ws)    Control - Non-Wounded
+</code></pre></article><nav class="docs-footer"><a class="docs-footer-nextpage" href="functions/">Functions »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 0.27.23 on <span class="colophon-date" title="Wednesday 7 September 2022 04:52">Wednesday 7 September 2022</span>. Using Julia version 1.8.0.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
